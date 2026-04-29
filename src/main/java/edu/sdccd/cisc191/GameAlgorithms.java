@@ -46,7 +46,7 @@ public class GameAlgorithms {
             return -1;
         }
 
-        int mid = (low + high) / 2;
+        int mid = low + (high - low) / 2; // used safer midpoint for calculation to avoid integer overflow
 
         if (sortedMatchIds[mid] == target) {
             return mid;
@@ -71,7 +71,7 @@ public class GameAlgorithms {
         int high = sortedMatchIds.length - 1;
 
         while (low <= high) {
-            int mid = (low + high) / 2;
+            int mid = low + (high - low) / 2; // used safer midpoint for calculation to avoid integer overflow
 
             if (sortedMatchIds[mid] == target) {
                 return mid;
@@ -180,7 +180,8 @@ public class GameAlgorithms {
             return false;
         }
 
-        if (node.getMatchName().equals(target)) {
+        // this makes the method safer if target is ever null
+        if (target != null && target.equals(node.getMatchName())) {
             return true;
         }
 
